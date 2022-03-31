@@ -49,18 +49,19 @@ public class Server {
             while(true){
                 System.out.println("等待客户端连接");
                 Socket socket = serverSocket.accept();
-                System.out.println("一个客户端连接了！");
+                System.out.println("第"+"个客户端连接了！");
 
-                InputStream in = socket.getInputStream();
-                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-                BufferedReader br = new BufferedReader(isr);
-
-                String line;
-
-                while ((line = br.readLine())!=null) {
-                    System.out.println("客户端说：" + line);
-                }
+//                InputStream in = socket.getInputStream();
+//                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+//                BufferedReader br = new BufferedReader(isr);
+//
+//                String line;
+//
+//                while ((line = br.readLine())!=null) {
+//                    System.out.println("客户端说：" + line);
+//                }
             }
+
 //
 //            //
 //            InputStream in = socket.getInputStream();
