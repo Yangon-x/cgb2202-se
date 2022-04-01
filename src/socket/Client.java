@@ -30,8 +30,9 @@ public class Client {
                 该机器上的服务端应用程序从而与之建立连接。
             * */
             //本机IP地址的写法可以是“localhost”
+            //176.17.10.56
             System.out.println("正在连接服务端。。。");
-            socket = new Socket("localhost",8088);
+            socket = new Socket("176.17.10.56",8088);
             System.out.println("与服务端建立连接了！");
         } catch (IOException e) {
             e.printStackTrace();

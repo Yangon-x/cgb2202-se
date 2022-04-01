@@ -50,6 +50,10 @@ public class Server {
                 System.out.println("等待客户端连接");
                 Socket socket = serverSocket.accept();
                 System.out.println("第"+"个客户端连接了！");
+                //启动一个线程来处理该客户端的交互
+                ClientHandler clientHandler = new ClientHandler(socket);
+                Thread thread = new Thread(clientHandler);
+                thread.start();
 
 //                InputStream in = socket.getInputStream();
 //                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
@@ -85,5 +89,33 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         server.start();
+    }
+    /*
+    * 该线程任务是用一个线程来处理一个客户端的交互工作
+    * */
+    private class ClientHandler implements Runnable{
+        private Socket socket;
+        private String host;//记录远端计算机的地址信息
+
+        public ClientHandler (Socket socket){
+            this.socket=socket;
+            host = socket.getInetAddress().getHostAddress();
+        }
+        public void run() {
+            try {
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+
+                String line;
+
+                while ((line = br.readLine()) != null) {
+                    System.out.println(host+"客户端说：" + line);
+                }
+            } catch (IOException e) {
+//                e.printStackTrace();
+            } finally {
+            }
+        }
     }
 }
